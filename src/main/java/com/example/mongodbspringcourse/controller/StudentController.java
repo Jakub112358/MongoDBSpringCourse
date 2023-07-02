@@ -37,4 +37,19 @@ public class StudentController {
     public String deleteStudent(@PathVariable String id) {
         return studentService.deleteStudent(id);
     }
+
+    @GetMapping("/studentsByName/{name}")
+    public List<Student> studentsByName(@PathVariable String name) {
+        return studentService.getStudentsByName(name);
+    }
+
+    @GetMapping("/studentsByNameAndEmail")
+    public List<Student> studentsByNameAndEmail(@RequestParam String name, @RequestParam String email) {
+        return studentService.studentsByNameAndEmail(name, email);
+    }
+
+    @GetMapping("/studentsByNameOrEmail")
+    public List<Student> studentsByNameOrEmail(@RequestParam String name, @RequestParam String email) {
+        return studentService.studentsByNameOrEmail(name, email);
+    }
 }
