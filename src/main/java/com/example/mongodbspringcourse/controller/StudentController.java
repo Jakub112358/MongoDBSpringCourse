@@ -52,4 +52,14 @@ public class StudentController {
     public List<Student> studentsByNameOrEmail(@RequestParam String name, @RequestParam String email) {
         return studentService.studentsByNameOrEmail(name, email);
     }
+
+    @GetMapping("/allWithPagination")
+    public List<Student> getAllWithPagination(@RequestParam int pageNo, @RequestParam int pageSize){
+        return studentService.getAllWithPagination(pageNo, pageSize);
+    }
+    @GetMapping("/allWithSorting")
+    public List<Student> getAllWithSorting(){
+        return studentService.getAllWithSorting();
+    }
+
 }

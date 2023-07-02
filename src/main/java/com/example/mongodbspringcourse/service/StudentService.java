@@ -3,6 +3,9 @@ package com.example.mongodbspringcourse.service;
 import com.example.mongodbspringcourse.model.Student;
 import com.example.mongodbspringcourse.repository.StudentRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -42,5 +45,16 @@ public class StudentService {
 
     public List<Student> studentsByNameOrEmail(String name, String email) {
         return studentRepository.findByNameOrEmail(name, email);
+    }
+
+    public List<Student> getAllWithPagination(int pageNo, int pageSize) {
+        Pageable pageable = PageRequest.of(pageNo - 1, pageSize);
+        return studentRepository.findAll(pageable).getContent();
+    }
+
+    public List<Student> getAllWithSorting() {
+        Sort sort = Sort.by(Sort.Direction.ASC, "name");
+
+        return studentRepository.findAll(sort);
     }
 }
