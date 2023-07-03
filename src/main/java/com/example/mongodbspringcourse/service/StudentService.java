@@ -14,6 +14,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class StudentService {
     private final StudentRepository studentRepository;
+
     public Student createStudent(Student student) {
         return studentRepository.save(student);
     }
@@ -56,5 +57,21 @@ public class StudentService {
         Sort sort = Sort.by(Sort.Direction.ASC, "name");
 
         return studentRepository.findAll(sort);
+    }
+
+    public List<Student> byDepartmentName(String deptName) {
+        return studentRepository.findByDepartmentDepartmentName(deptName);
+    }
+
+    public List<Student> bySubjectName(String subName) {
+        return studentRepository.findBySubjectsSubjectName(subName);
+    }
+
+    public List<Student> emailLike(String email) {
+        return studentRepository.findByEmailLike(email);
+    }
+
+    public List<Student> nameStartsWith(String name) {
+        return studentRepository.findByNameStartsWith(name);
     }
 }

@@ -10,6 +10,9 @@ import java.util.List;
 public interface StudentRepository extends MongoRepository<Student, String> {
     List<Student> findByName(String name);
     List<Student> findByNameAndEmail(String name, String email);
-
     List<Student> findByNameOrEmail(String name, String email);
+    List<Student> findByDepartmentDepartmentName(String deptName);
+    List<Student> findBySubjectsSubjectName(String subName);
+    List<Student> findByEmailLike(String email);
+    List<Student> findByNameStartsWith(String name);
 }
