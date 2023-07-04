@@ -1,7 +1,9 @@
 package com.example.mongodbspringcourse.service;
 
 import com.example.mongodbspringcourse.model.Student;
+import com.example.mongodbspringcourse.repository.DepartmentRepository;
 import com.example.mongodbspringcourse.repository.StudentRepository;
+import com.example.mongodbspringcourse.repository.SubjectRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -14,8 +16,16 @@ import java.util.List;
 @RequiredArgsConstructor
 public class StudentService {
     private final StudentRepository studentRepository;
+    private final DepartmentRepository departmentRepository;
+    private final SubjectRepository subjectRepository;
 
     public Student createStudent(Student student) {
+        if(student.getDepartment() != null){
+            departmentRepository.save(student.getDepartment());
+        }
+        if(student.getSubjects() != null && student.getSubjects().size() > 0){
+            subjectRepository.saveAll(student.getSubjects());
+        }
         return studentRepository.save(student);
     }
 
@@ -73,5 +83,9 @@ public class StudentService {
 
     public List<Student> nameStartsWith(String name) {
         return studentRepository.findByNameStartsWith(name);
+    }
+
+    public List<Student> byDepartmentId(String deptId) {
+        return studentRepository.findByDepartmentId(deptId);
     }
 }
