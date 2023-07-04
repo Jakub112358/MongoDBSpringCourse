@@ -47,7 +47,7 @@ public class StudentService {
     }
 
     public List<Student> getStudentsByName(String name) {
-        return studentRepository.findByName(name);
+        return studentRepository.getByName(name);
     }
 
     public List<Student> studentsByNameAndEmail(String name, String email) {
